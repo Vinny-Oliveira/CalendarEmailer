@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour {
     private Button resetEventsButton;
 
     [SerializeField]
-    private Button sendAllEmailsButtn;
+    private Button sendAllEmailsButton;
 
     [SerializeField]
     private GameObject calendarEventPrefab;
@@ -72,12 +72,14 @@ public class EventManager : MonoBehaviour {
                     DisplayEvent(eventItem);
                 }
 
+                sendAllEmailsButton.interactable = true;
+
             } else {
                 throw new Exception("No upcoming events found.");
             }
 
         } catch (Exception ex) {
-            Debug.Log("ERROR: " + ex.Message);
+            Debug.LogError(ex.Message);
         }
     }
 
@@ -120,6 +122,24 @@ public class EventManager : MonoBehaviour {
         CalendarEvent calendarEvent = Instantiate(calendarEventPrefab, contentView).GetComponent<CalendarEvent>();
         calendarEvent.EventItem = eventItem;
         calendarEvent.DisplayEventDetails();
+    }
+
+    /// <summary>
+    /// When the Send All button is pressed, send emails to all the events that were not yet sent
+    /// </summary>
+    public void OnSendAllEmailsButtonPressed() {
+        try {
+            foreach (var eventPanel in contentView.GetComponentsInChildren<CalendarEvent>()) {
+                if (!eventPanel.IsEmailSent) {
+                    eventPanel.SendEmail();
+                }
+            }
+
+            sendAllEmailsButton.interactable = false;
+
+        } catch (Exception ex) {
+            Debug.LogError(ex.Message);
+        }
     }
 
 }

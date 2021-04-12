@@ -9,6 +9,9 @@ public class CalendarEvent : MonoBehaviour {
     public Google.Apis.Calendar.v3.Data.Event EventItem { get; set; }
 
     private bool isEmailSent;
+    public bool IsEmailSent {
+        get => isEmailSent;
+    }
     
     [SerializeField]
     private Text eventSummaryText;
@@ -55,6 +58,14 @@ public class CalendarEvent : MonoBehaviour {
     /// Send an email about the event when the Send Email button is pressed
     /// </summary>
     public void OnSendEmailButtonPressed() {
+        try {
+            SendEmail();
+        } catch (Exception ex) {
+            Debug.LogError(ex.Message);
+        }
+    }
+
+    public void SendEmail() {
         EmailSender.SendEmail(EmailSender.ComposeEmail(this, CalendarConstants.sender), CalendarConstants.sender, CalendarConstants.password);
 
         // DIsable the button

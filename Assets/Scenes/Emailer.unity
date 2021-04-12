@@ -610,7 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dateInputField: {fileID: 1658185628}
   resetEventsButton: {fileID: 1702742735}
-  sendAllEmailsButtn: {fileID: 1786223443}
+  sendAllEmailsButton: {fileID: 1786223443}
   calendarEventPrefab: {fileID: 1591780737982433183, guid: 2168c9fe2d744ef45a3f131a7ecb005d,
     type: 3}
   contentView: {fileID: 1364134718}
@@ -1757,7 +1757,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1786223444}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 497669569}
+        m_MethodName: OnSendAllEmailsButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1786223444
 MonoBehaviour:
   m_ObjectHideFlags: 0

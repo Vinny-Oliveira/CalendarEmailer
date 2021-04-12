@@ -118,7 +118,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1591780736846368075}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8950096259045566346}
+        m_MethodName: OnSendEmailButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1591780737152135143
 GameObject:
   m_ObjectHideFlags: 0
