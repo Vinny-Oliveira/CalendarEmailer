@@ -8,6 +8,12 @@ using UnityEngine;
 
 public class EmailSender {
 
+    /// <summary>
+    /// Composes an email from a given calendar event
+    /// </summary>
+    /// <param name="calendarEvent">Calendar Event</param>
+    /// <param name="fromEmail">Email address used to send from</param>
+    /// <returns>Return the full Mail Message</returns>
     public MailMessage ComposeEmail(CalendarEvent calendarEvent, string fromEmail) {
         MailMessage mailMessage = new MailMessage() {
             IsBodyHtml = true,
@@ -33,7 +39,7 @@ public class EmailSender {
     /// <summary>
     /// Send an email about the Google Calendar Event to the attendees
     /// </summary>
-    /// <param name="eventItem">Google Calendar Event</param>
+    /// <param name="mailMessage">The message to be sent</param>
     /// <param name="email">Sender's email address</param>
     /// <param name="password">Password of the sender's email address</param>
     public void SendEmail(MailMessage mailMessage, string email, string password) {
