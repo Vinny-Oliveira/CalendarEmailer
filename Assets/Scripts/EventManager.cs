@@ -58,6 +58,11 @@ public class EventManager : MonoBehaviour {
     /// </summary>
     public void OnResetEventsButtonPressed() {
         try {
+            // Eliminate the existing events
+            foreach (var eventPanel in contentView.GetComponentsInChildren<CalendarEvent>()) {
+                Destroy(eventPanel.gameObject);
+            }
+            
             // List of events
             Events events = GetEvents();
 
