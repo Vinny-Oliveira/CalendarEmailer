@@ -33,11 +33,6 @@ public class EventManager : MonoBehaviour {
     static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
     static string ApplicationName = "Google Calendar API .NET Quickstart";
 
-    // Email info
-    readonly string calendarName = "extraedinc@gmail.com";
-    readonly string sender = "vini@extraed.ca";
-    readonly string password = "Vini349?$vjeL";
-
     /// <summary>
     /// Run on the first frame
     /// </summary>
@@ -67,26 +62,10 @@ public class EventManager : MonoBehaviour {
             Events events = GetEvents();
 
             if (events.Items != null && events.Items.Count > 0) {
-
-                //    EmailSender emailSender = new EmailSender();
-                //    List<MailMessage> messages = new List<MailMessage>();
-
+                // Display each event
                 foreach (var eventItem in events.Items) {
                     DisplayEvent(eventItem);
-                    //messages.Add(emailSender.ComposeEmail(eventItem, sender));
                 }
-
-                //    Console.WriteLine("\nAre you sure you want to send these emails? Press 'y' to send all or any other key to abort");
-                //    string input = Console.ReadLine();
-
-                //    if (input.Equals("Y", StringComparison.OrdinalIgnoreCase)) {
-                //        foreach (var message in messages) {
-                //            emailSender.SendEmail(message, sender, password);
-                //        }
-                //        Console.WriteLine("Emails sent successfully!");
-                //    } else {
-                //        Console.WriteLine("Operation aborted.");
-                //    }
 
             } else {
                 throw new Exception("No upcoming events found.");
@@ -114,7 +93,6 @@ public class EventManager : MonoBehaviour {
                 "user",
                 CancellationToken.None,
                 new FileDataStore(credPath, true)).Result;
-            Console.WriteLine("Credential file saved to: " + credPath);
         }
 
         // Create Google Calendar API service.
@@ -128,7 +106,7 @@ public class EventManager : MonoBehaviour {
         DateTime startDate = DateTime.Parse(dateInputField.text);
 
         // List of events
-        Events events = calendarEventsGetter.GetEvents(calendarName, service, startDate);
+        Events events = calendarEventsGetter.GetEvents(CalendarConstants.calendarName, service, startDate);
         return events;
     }
 

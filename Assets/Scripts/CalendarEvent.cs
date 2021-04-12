@@ -28,6 +28,9 @@ public class CalendarEvent : MonoBehaviour {
     public void DisplayEventDetails() {
         eventSummaryText.text = EventItem.Summary;
         eventStartTimeText.text = GetEventTime();
+        btnSendEmail.interactable = true;
+        textButton.text = "SEND EMAIL";
+        isEmailSent = false;
     }
 
     /// <summary>
@@ -46,6 +49,19 @@ public class CalendarEvent : MonoBehaviour {
         }
 
         return $"{hour}:{minute} {ampm}";
+    }
+
+    /// <summary>
+    /// Send an email about the event when the Send Email button is pressed
+    /// </summary>
+    public void OnSendEmailButtonPressed() {
+        EmailSender emailSender = new EmailSender();
+        emailSender.SendEmail(emailSender.ComposeEmail(this, CalendarConstants.sender), CalendarConstants.sender, CalendarConstants.password);
+
+        // DIsable the button
+        btnSendEmail.interactable = false;
+        textButton.text = "SENT";
+        isEmailSent = true;
     }
 
 }
