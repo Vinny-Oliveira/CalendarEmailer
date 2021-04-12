@@ -34,7 +34,7 @@ public class EventManager : MonoBehaviour {
     static string ApplicationName = "Google Calendar API .NET Quickstart";
 
     // Email info
-    readonly string email = "extraedinc@gmail.com";
+    readonly string calendarName = "extraedinc@gmail.com";
     readonly string sender = "vini@extraed.ca";
     readonly string password = "Vini349?$vjeL";
 
@@ -50,13 +50,12 @@ public class EventManager : MonoBehaviour {
     /// </summary>
     private void DisplayTomorrowsDefaultDate() {
         DateTime defaultDate = DateTime.Today.AddDays(1);
-        string[] tomorrowDate = new string[3] {
-            defaultDate.Year.ToString(),
-            defaultDate.Month < 10 ? string.Concat("0", defaultDate.Month.ToString()) : defaultDate.Month.ToString(),
-            defaultDate.Day < 10 ? string.Concat("0", defaultDate.Day.ToString()) : defaultDate.Day.ToString()
-        };
+        int year = defaultDate.Year;
+        string month = defaultDate.Month < 10 ? string.Concat("0", defaultDate.Month.ToString()) : defaultDate.Month.ToString();
+        string day = defaultDate.Day < 10 ? string.Concat("0", defaultDate.Day.ToString()) : defaultDate.Day.ToString();
 
-        dateInputField.text = string.Join("-", tomorrowDate);
+
+        dateInputField.text = $"{year}-{month}-{day}";
     }
 
     /// <summary>
@@ -129,7 +128,7 @@ public class EventManager : MonoBehaviour {
         DateTime startDate = DateTime.Parse(dateInputField.text);
 
         // List of events
-        Events events = calendarEventsGetter.GetEvents(email, service, startDate);
+        Events events = calendarEventsGetter.GetEvents(calendarName, service, startDate);
         return events;
     }
 

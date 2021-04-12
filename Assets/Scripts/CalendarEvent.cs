@@ -27,12 +27,25 @@ public class CalendarEvent : MonoBehaviour {
     /// </summary>
     public void DisplayEventDetails() {
         eventSummaryText.text = EventItem.Summary;
+        eventStartTimeText.text = GetEventTime();
+    }
 
+    /// <summary>
+    /// Get the start time of the event as a string
+    /// </summary>
+    /// <returns>The start time fo the event as a string</returns>
+    public string GetEventTime() {
         DateTime eventDate = (DateTime)EventItem.Start.DateTime;
         int hour = eventDate.Hour;
         string minute = eventDate.Minute < 10 ? string.Concat("0", eventDate.Minute) : eventDate.Minute.ToString();
 
-        eventStartTimeText.text = hour + ":" + minute;
+        string ampm = (hour > 11) ? "pm" : "am";
+
+        if (hour > 12) {
+            hour -= 12;
+        }
+
+        return $"{hour}:{minute} {ampm}";
     }
 
 }
