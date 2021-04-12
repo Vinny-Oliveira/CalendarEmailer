@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,13 +22,15 @@ public class CalendarEvent : MonoBehaviour {
     [SerializeField]
     private Text textButton;
 
+    /// <summary>
+    /// Display Summary and Start Time of the event on the panel
+    /// </summary>
     public void DisplayEventDetails() {
         eventSummaryText.text = EventItem.Summary;
 
-        // Build start time
-        string eventDateTime = EventItem.Start.DateTime.ToString();
-        int.TryParse(eventDateTime.Substring(10, 2), out int hour);
-        string minute = eventDateTime.Substring(13, 2);
+        DateTime eventDate = (DateTime)EventItem.Start.DateTime;
+        int hour = eventDate.Hour;
+        string minute = eventDate.Minute < 10 ? string.Concat("0", eventDate.Minute) : eventDate.Minute.ToString();
 
         eventStartTimeText.text = hour + ":" + minute;
     }
