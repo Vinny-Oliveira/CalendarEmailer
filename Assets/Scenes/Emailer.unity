@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd47746b80b55146a6685569deff719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dateField: {fileID: 1658185628}
+  dateInputField: {fileID: 1658185628}
   resetEventsButton: {fileID: 1702742735}
   sendAllEmailsButtn: {fileID: 1786223443}
   calendarEventPrefab: {fileID: 1591780737982433183, guid: 2168c9fe2d744ef45a3f131a7ecb005d,

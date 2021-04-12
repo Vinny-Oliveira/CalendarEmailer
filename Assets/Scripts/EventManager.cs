@@ -14,7 +14,7 @@ using UnityEngine.UI;
 public class EventManager : MonoBehaviour {
 
     [SerializeField]
-    private InputField dateField;
+    private InputField dateInputField;
 
     [SerializeField]
     private Button resetEventsButton;
@@ -38,35 +38,59 @@ public class EventManager : MonoBehaviour {
     readonly string sender = "vini@extraed.ca";
     readonly string password = "Vini349?$vjeL";
 
+    /// <summary>
+    /// Run on the first frame
+    /// </summary>
+    private void Start() {
+        DisplayTomorrowsDefaultDate();
+    }
+
+    /// <summary>
+    /// Display tomorrow's date as the default of the date input field
+    /// </summary>
+    private void DisplayTomorrowsDefaultDate() {
+        DateTime defaultDate = DateTime.Today.AddDays(1);
+        string[] tomorrowDate = new string[3] {
+            defaultDate.Year.ToString(),
+            defaultDate.Month < 10 ? string.Concat("0", defaultDate.Month.ToString()) : defaultDate.Month.ToString(),
+            defaultDate.Day < 10 ? string.Concat("0", defaultDate.Day.ToString()) : defaultDate.Day.ToString()
+        };
+
+        dateInputField.text = string.Join("-", tomorrowDate);
+    }
+
+    /// <summary>
+    /// When the Reset Button is pressed, use the date that was input to desplay the list of events
+    /// </summary>
     public void OnResetEventsButtonPressed() {
         try {
             // List of events
             Events events = GetEvents();
 
             if (events.Items != null && events.Items.Count > 0) {
-                DisplayEvent(events);
 
-            //    EmailSender emailSender = new EmailSender();
-            //    List<MailMessage> messages = new List<MailMessage>();
+                //    EmailSender emailSender = new EmailSender();
+                //    List<MailMessage> messages = new List<MailMessage>();
 
-            //    foreach (var eventItem in events.Items) {
-            //        messages.Add(emailSender.ComposeEmail(eventItem, sender));
-            //    }
+                foreach (var eventItem in events.Items) {
+                    DisplayEvent(eventItem);
+                    //messages.Add(emailSender.ComposeEmail(eventItem, sender));
+                }
 
-            //    Console.WriteLine("\nAre you sure you want to send these emails? Press 'y' to send all or any other key to abort");
-            //    string input = Console.ReadLine();
+                //    Console.WriteLine("\nAre you sure you want to send these emails? Press 'y' to send all or any other key to abort");
+                //    string input = Console.ReadLine();
 
-            //    if (input.Equals("Y", StringComparison.OrdinalIgnoreCase)) {
-            //        foreach (var message in messages) {
-            //            emailSender.SendEmail(message, sender, password);
-            //        }
-            //        Console.WriteLine("Emails sent successfully!");
-            //    } else {
-            //        Console.WriteLine("Operation aborted.");
-            //    }
+                //    if (input.Equals("Y", StringComparison.OrdinalIgnoreCase)) {
+                //        foreach (var message in messages) {
+                //            emailSender.SendEmail(message, sender, password);
+                //        }
+                //        Console.WriteLine("Emails sent successfully!");
+                //    } else {
+                //        Console.WriteLine("Operation aborted.");
+                //    }
 
-            //} else {
-            //    Console.WriteLine("No upcoming events found.");
+            } else {
+                throw new Exception("No upcoming events found.");
             }
 
         } catch (Exception ex) {
@@ -102,17 +126,20 @@ public class EventManager : MonoBehaviour {
 
         // Define parameters of request.
         CalendarEventsGetter calendarEventsGetter = new CalendarEventsGetter();
-        DateTime startDate = DateTime.Parse(dateField.text);
+        DateTime startDate = DateTime.Parse(dateInputField.text);
 
         // List of events
         Events events = calendarEventsGetter.GetEvents(email, service, startDate);
         return events;
     }
 
-
-    private void DisplayEvent(Events events) {
+    /// <summary>
+    /// Display an event on the event list
+    /// </summary>
+    /// <param name="events"></param>
+    private void DisplayEvent(Google.Apis.Calendar.v3.Data.Event eventItem) {
         CalendarEvent calendarEvent = Instantiate(calendarEventPrefab, contentView).GetComponent<CalendarEvent>();
-        calendarEvent.EventItem = events.Items[0];
+        calendarEvent.EventItem = eventItem;
         calendarEvent.DisplayEventDetails();
     }
 
