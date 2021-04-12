@@ -44,7 +44,7 @@ public class EventManager : MonoBehaviour {
             Events events = GetEvents();
 
             if (events.Items != null && events.Items.Count > 0) {
-                
+                DisplayEvent(events);
 
             //    EmailSender emailSender = new EmailSender();
             //    List<MailMessage> messages = new List<MailMessage>();
@@ -70,10 +70,7 @@ public class EventManager : MonoBehaviour {
             }
 
         } catch (Exception ex) {
-            Console.WriteLine("ERROR: {0}", ex.Message);
-        } finally {
-            Console.WriteLine("\nPress any key to exit");
-            Console.Read();
+            Debug.Log("ERROR: " + ex.Message);
         }
     }
 
@@ -84,7 +81,7 @@ public class EventManager : MonoBehaviour {
     private Events GetEvents() {
         UserCredential credential;
 
-        using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read)) {
+        using (var stream = new FileStream("Assets/StreamingAssets/credentials.json", FileMode.Open, FileAccess.Read)) {
             // The file token.json stores the user's access and refresh tokens, and is created
             // automatically when the authorization flow completes for the first time.
             string credPath = "token.json";
@@ -116,6 +113,7 @@ public class EventManager : MonoBehaviour {
     private void DisplayEvent(Events events) {
         CalendarEvent calendarEvent = Instantiate(calendarEventPrefab, contentView).GetComponent<CalendarEvent>();
         calendarEvent.EventItem = events.Items[0];
+        calendarEvent.DisplayEventDetails();
     }
 
 }

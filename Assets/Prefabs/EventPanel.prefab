@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 1591780737444975848}
   - component: {fileID: 1591780737444975851}
   m_Layer: 5
-  m_Name: TitlePanel
+  m_Name: SummaryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 1591780737569895064}
   - component: {fileID: 1591780737569895067}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,7 +437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155c3890f94593d43992e8b71e161bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSummaryText: {fileID: 1591780738112969078}
+  eventStartTimeText: {fileID: 1591780738892600225}
   btnSendEmail: {fileID: 1591780736846368074}
+  textButton: {fileID: 1591780737569895067}
 --- !u!1 &1591780738112969072
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +453,7 @@ GameObject:
   - component: {fileID: 1591780738112969079}
   - component: {fileID: 1591780738112969078}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SummaryText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +531,7 @@ GameObject:
   - component: {fileID: 1591780738892600230}
   - component: {fileID: 1591780738892600225}
   m_Layer: 5
-  m_Name: Text
+  m_Name: StartTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
