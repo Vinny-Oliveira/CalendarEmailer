@@ -24,6 +24,9 @@ public class EventManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject calendarEventPrefab;
+    
+    [SerializeField]
+    private Transform contentView;
 
     // If modifying these scopes, delete your previously saved credentials
     // at ~/.credentials/calendar-dotnet-quickstart.json
@@ -40,7 +43,9 @@ public class EventManager : MonoBehaviour {
             // List of events
             Events events = GetEvents();
 
-            //if (events.Items != null && events.Items.Count > 0) {
+            if (events.Items != null && events.Items.Count > 0) {
+                
+
             //    EmailSender emailSender = new EmailSender();
             //    List<MailMessage> messages = new List<MailMessage>();
 
@@ -62,7 +67,7 @@ public class EventManager : MonoBehaviour {
 
             //} else {
             //    Console.WriteLine("No upcoming events found.");
-            //}
+            }
 
         } catch (Exception ex) {
             Console.WriteLine("ERROR: {0}", ex.Message);
@@ -99,12 +104,18 @@ public class EventManager : MonoBehaviour {
         });
 
         // Define parameters of request.
-        CalendarEventsGetter calendarEventsGetter = new();
+        CalendarEventsGetter calendarEventsGetter = new CalendarEventsGetter();
         DateTime startDate = DateTime.Parse(dateField.text);
 
         // List of events
         Events events = calendarEventsGetter.GetEvents(email, service, startDate);
         return events;
+    }
+
+
+    private void DisplayEvent(Events events) {
+        CalendarEvent calendarEvent = Instantiate(calendarEventPrefab, contentView).GetComponent<CalendarEvent>();
+        calendarEvent.EventItem = events.Items[0];
     }
 
 }
