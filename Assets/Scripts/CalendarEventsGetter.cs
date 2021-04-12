@@ -13,7 +13,7 @@ public class CalendarEventsGetter {
     /// <param name="email"></param>
     /// <param name="service"></param>
     /// <returns></returns>
-    public Events GetEvents(string email, CalendarService service, DateTime startDate) {
+    public static Events GetEvents(string email, CalendarService service, DateTime startDate) {
         EventsResource.ListRequest request = service.Events.List(email);
 
         DateTime endDate = startDate.AddDays(1.0);

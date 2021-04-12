@@ -106,12 +106,9 @@ public class EventManager : MonoBehaviour {
             ApplicationName = ApplicationName,
         });
 
-        // Define parameters of request.
-        CalendarEventsGetter calendarEventsGetter = new CalendarEventsGetter();
-        DateTime startDate = DateTime.Parse(dateInputField.text);
-
         // List of events
-        Events events = calendarEventsGetter.GetEvents(CalendarConstants.calendarName, service, startDate);
+        DateTime startDate = DateTime.Parse(dateInputField.text);
+        Events events = CalendarEventsGetter.GetEvents(CalendarConstants.calendarName, service, startDate);
         return events;
     }
 

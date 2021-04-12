@@ -55,8 +55,7 @@ public class CalendarEvent : MonoBehaviour {
     /// Send an email about the event when the Send Email button is pressed
     /// </summary>
     public void OnSendEmailButtonPressed() {
-        EmailSender emailSender = new EmailSender();
-        emailSender.SendEmail(emailSender.ComposeEmail(this, CalendarConstants.sender), CalendarConstants.sender, CalendarConstants.password);
+        EmailSender.SendEmail(EmailSender.ComposeEmail(this, CalendarConstants.sender), CalendarConstants.sender, CalendarConstants.password);
 
         // DIsable the button
         btnSendEmail.interactable = false;
