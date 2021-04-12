@@ -61,10 +61,14 @@ public class CalendarEvent : MonoBehaviour {
         try {
             SendEmail();
         } catch (Exception ex) {
-            Debug.LogError(ex.Message);
+            EventManager eventManager = FindObjectOfType<EventManager>();
+            eventManager.DisplayError(ex);
         }
     }
 
+    /// <summary>
+    /// Send an email and disable the email button
+    /// </summary>
     public void SendEmail() {
         EmailSender.SendEmail(EmailSender.ComposeEmail(this, CalendarConstants.sender), CalendarConstants.sender, CalendarConstants.password);
 

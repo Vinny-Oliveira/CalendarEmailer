@@ -27,6 +27,12 @@ public class EventManager : MonoBehaviour {
     
     [SerializeField]
     private Transform contentView;
+    
+    [SerializeField]
+    private Text errorText;
+    
+    [SerializeField]
+    private GameObject errorPanel;
 
     // If modifying these scopes, delete your previously saved credentials
     // at ~/.credentials/calendar-dotnet-quickstart.json
@@ -79,7 +85,7 @@ public class EventManager : MonoBehaviour {
             }
 
         } catch (Exception ex) {
-            Debug.LogError(ex.Message);
+            DisplayError(ex);
         }
     }
 
@@ -138,8 +144,18 @@ public class EventManager : MonoBehaviour {
             sendAllEmailsButton.interactable = false;
 
         } catch (Exception ex) {
-            Debug.LogError(ex.Message);
+            DisplayError(ex);
         }
+    }
+
+    /// <summary>
+    /// Display an error panel with the error message
+    /// </summary>
+    /// <param name="ex"></param>
+    public void DisplayError(Exception ex) {
+        Debug.LogError(ex.Message);
+        errorText.text = ex.Message;
+        errorPanel.SetActive(true);
     }
 
 }
